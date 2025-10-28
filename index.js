@@ -28,20 +28,20 @@ let userSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, 'First name is required'],
-        // match: [/^[A-Za-z]+$/, 'first name must contain only letters'],
+        match: [/^[A-Za-z]+$/, 'first name must contain only letters'],
         trim: true,
     },
     lastName: {
         type: String,
         required: [true, 'Last name is required'],
-        // match: [/^[A-Za-z]+$/, 'first name must contain only letters'],
+        match: [/^[A-Za-z]+$/, 'first name must contain only letters'],
         trim: true,
     },
     email: {
         type: String,
         required: [true, 'Email is required'],
         unique: [true, 'Email is already in used, please use another one'],
-        // match: [/^[^\s@]+$/, 'first name must contain only letters'],
+        match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'first name must contain only letters'],
         trim: true,
         lowercase: true,
     },
@@ -49,6 +49,7 @@ let userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Password is required'],
         unique: [true, 'Email is already in used, please use another one'],
+        match: [/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Password must contain atleast 8 characters long, contain uppercase, Lowercase, a number and a special character'],
         trim: true,
     },
 })
@@ -87,7 +88,7 @@ app.post('/register', (req, res) => {
 //     res.send(allStudent)
 // })
 
-app.get("/signup", (req, res) => {
+app.get("/", (req, res) => {
     res.render("signup")
 
 })
@@ -101,19 +102,6 @@ app.get("/dashboard", (req, res) => {
     res.render("dashboard")
 
 })
-
-
-// let array = [
-//     {Id: 1, userNmae: 'Wealth', level: 'Level 3'},
-//     {Id: 2, userNmae: 'Wealth', level: 'Level 3'},
-//     {Id: 3, userNmae: 'Wealth', level: 'Level 3'},
-//     {Id: 4, userNmae: 'Wealth', level: 'Level 3'},
-//     {Id: 5, userNmae: 'Wealth', level: 'Level 3'},
-//     {Id: 6, userNmae: 'Wealth', level: 'Level 3'},
-//     {Id: 7, userNmae: 'Wealth', level: 'Level 3'},
-//     {Id: 8, userNmae: 'Wealth', level: 'Level 3'},
-//     {Id: 9, userNmae: 'Wealth', level: 'Level 3'},
-// ]
 
 app.get('/hopepage', (req, res) => {
     res.sendFile(__dirname + "/index.html")
