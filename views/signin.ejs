@@ -803,9 +803,9 @@
             <h1>Welcome Back</h1>
             <p>Login to access your account</p>
 
-            <form action="#">
+            <form action="/user/login" method="post">
                 <div class="input-box">
-                    <input type="email" placeholder="Email Address" required />
+                    <input type="email" name="email" placeholder="Email Address" required />
                 </div>
 
                 <div class="input-box">
@@ -824,7 +824,7 @@
                 <button id="signin" class="btn">Sign In</button>
 
                 <p class="signup-text">
-                    Don’t have an account? <a href="./signup" style="color: black; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight:800">Sign Up</a>
+                    Don’t have an account? <a href="/user/signup" style="color: black; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight:800">Sign Up</a>
                 </p>
             </form>
         </div>
