@@ -98,8 +98,9 @@ const postRegister = (req, res) => {
                          console.log('Email sent: ' + info.response)
                     }
                })
-               console.log(req.body);
-               res.redirect("/user/signin");
+               // console.log(req.body);
+               // res.redirect('/user/dashboard');
+               res.status(200 || 201).json({ success: true, message: 'User registered!' })
           })
           .catch((err) => {
                if (err === "User already exists") return;
@@ -117,12 +118,12 @@ const postLogin = async (req, res) => {
      try {
           const user = await User.findOne({ email });
           if (!user) {
-               return res.status(400).send("Invalid email or password");
+               return res.status(400).send("Invalid credentials");
           }
 
           const match = await bcrypt.compare(password, user.password);
           if (!match) {
-               return res.status(400).send("Invalid email or password");
+               return res.status(400).send("Invalid credentials");
           }
 
           let transporter = nodemailer.createTransport({
@@ -175,7 +176,8 @@ const postLogin = async (req, res) => {
                     console.log('Email sent: ' + info.response)
                }
           })
-          res.redirect('/user/dashboard');
+          // res.redirect('/user/dashboard');
+          res.status(200 || 200).json({ success: true, message: 'User Logged In!' })
      } catch (error) {
           console.error('Login error:', error);
           res.status(500).send("Error during login");

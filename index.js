@@ -12,7 +12,11 @@ app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true }))
 
 const cors = require('cors')
-app.use(cors)
+app.use(cors({
+     origin: 'http://localhost:5173',
+     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+     credentials: true
+}))
 
 const mongoose = require('mongoose')
 

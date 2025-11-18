@@ -10,7 +10,7 @@ router.post('/register', postRegister)
 
 router.get("/signin", getSignin)
 
-router.post('/user/login', postLogin);
+router.post('/login', postLogin);
 
 
 router.get("/dashboard", getDashboard)
