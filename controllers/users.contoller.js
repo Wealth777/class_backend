@@ -6,6 +6,8 @@ const pass = process.env.google_password
 
 const User = require('../models/user.models')
 
+const JWT = require('jsonwebtoken')
+
 const getSignup = (req, res) => {
      res.render("signup")
 }
@@ -177,7 +179,10 @@ const postLogin = async (req, res) => {
                }
           })
           // res.redirect('/user/dashboard');
-          res.status(200 || 200).json({ success: true, message: 'User Logged In!' })
+          const token = jwt.sign( {id: user.id, email: user.email}, JWT_SECRET, {  expiresIn: '2h' })
+          console.log(JWT_SECRET)
+          res.status(200 || 200).json({ success: true, message: 'User Logged In!', token })
+
      } catch (error) {
           console.error('Login error:', error);
           res.status(500).send("Error during login");
