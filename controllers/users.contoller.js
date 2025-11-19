@@ -6,7 +6,7 @@ const pass = process.env.google_password
 
 const User = require('../models/user.models')
 
-const JWT = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 const getSignup = (req, res) => {
      res.render("signup")
@@ -128,56 +128,56 @@ const postLogin = async (req, res) => {
                return res.status(400).send("Invalid credentials");
           }
 
-          let transporter = nodemailer.createTransport({
-               service: 'gmail',
+//           let transporter = nodemailer.createTransport({
+//                service: 'gmail',
 
-               auth: {
-                    user: 'olujidewealth3@gmail.com',
-                    pass
-               }
-          });
+//                auth: {
+//                     user: 'olujidewealth3@gmail.com',
+//                     pass
+//                }
+//           });
 
-          let mailOptions = {
-               from: 'olujidewealth3@gmail.com',
-               to: [req.body.email],
-               subject: 'Welcome to Our routerlication Again',
-               html: `
-    <div style="font-family: Arial, sans-serif; background-color: #f4f4f7; padding: 30px;">
-      <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-        <div style="background: linear-gradient(135deg, #2563EB, #581C87); padding: 20px; text-align: center;">
-          <h1 style="color: #fff; margin: 0;">Welcome to Our routerlication</h1>
-        </div>
-        <div style="padding: 20px;">
-          <p style="font-size: 16px; color: #333;">Hello, ${req.body.firstName}</p>
-          <p style="font-size: 15px; color: #555;">
-            Thank you for logging in. We’re glad to have you on board again.  
-            Explore more and enjoy our services.
-          </p>
-          <p style="font-size: 15px; color: #555;">
-            Click the button below to continue.
-          </p>
-          <div style="text-align: center; margin: 25px 0;">
-            <a href"http://localhost:3000/dashboard" 
-               style="background: #2563EB; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 15px;">
-              Explore more
-            </a>
-          </div>
-        </div>
-        <div style="background: #f0f0f0; text-align: center; padding: 10px;">
-          <p style="font-size: 12px; color: #666;">&copy; ${new Date().getFullYear()} Your Company Name. All rights reserved.</p>
-        </div>
-      </div>
-    </div>
-  `
-          }
+//           let mailOptions = {
+//                from: 'olujidewealth3@gmail.com',
+//                to: [req.body.email],
+//                subject: 'Welcome to Our routerlication Again',
+//                html: `
+//     <div style="font-family: Arial, sans-serif; background-color: #f4f4f7; padding: 30px;">
+//       <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+//         <div style="background: linear-gradient(135deg, #2563EB, #581C87); padding: 20px; text-align: center;">
+//           <h1 style="color: #fff; margin: 0;">Welcome to Our routerlication</h1>
+//         </div>
+//         <div style="padding: 20px;">
+//           <p style="font-size: 16px; color: #333;">Hello, ${req.body.firstName}</p>
+//           <p style="font-size: 15px; color: #555;">
+//             Thank you for logging in. We’re glad to have you on board again.  
+//             Explore more and enjoy our services.
+//           </p>
+//           <p style="font-size: 15px; color: #555;">
+//             Click the button below to continue.
+//           </p>
+//           <div style="text-align: center; margin: 25px 0;">
+//             <a href"http://localhost:3000/dashboard" 
+//                style="background: #2563EB; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 15px;">
+//               Explore more
+//             </a>
+//           </div>
+//         </div>
+//         <div style="background: #f0f0f0; text-align: center; padding: 10px;">
+//           <p style="font-size: 12px; color: #666;">&copy; ${new Date().getFullYear()} Your Company Name. All rights reserved.</p>
+//         </div>
+//       </div>
+//     </div>
+//   `
+//           }
 
-          transporter.sendMail(mailOptions, function (error, info) {
-               if (error) {
-                    console.log(error)
-               } else {
-                    console.log('Email sent: ' + info.response)
-               }
-          })
+//           transporter.sendMail(mailOptions, function (error, info) {
+//                if (error) {
+//                     console.log(error)
+//                } else {
+//                     console.log('Email sent: ' + info.response)
+//                }
+//           })
           // res.redirect('/user/dashboard');
           const token = jwt.sign( {id: user.id, email: user.email}, process.env.JWT_SECRET, {  expiresIn: '2h' })
           console.log(token)
