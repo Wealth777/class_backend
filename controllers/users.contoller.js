@@ -179,8 +179,8 @@ const postLogin = async (req, res) => {
                }
           })
           // res.redirect('/user/dashboard');
-          const token = jwt.sign( {id: user.id, email: user.email}, JWT_SECRET, {  expiresIn: '2h' })
-          console.log(JWT_SECRET)
+          const token = jwt.sign( {id: user.id, email: user.email}, process.env.JWT_SECRET, {  expiresIn: '2h' })
+          console.log(process.env.JWT_SECRET)
           res.status(200 || 200).json({ success: true, message: 'User Logged In!', token })
 
      } catch (error) {
