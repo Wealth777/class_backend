@@ -180,7 +180,7 @@ const postLogin = async (req, res) => {
           })
           // res.redirect('/user/dashboard');
           const token = jwt.sign( {id: user.id, email: user.email}, process.env.JWT_SECRET, {  expiresIn: '2h' })
-          console.log(process.env.JWT_SECRET)
+          console.log(token)
           res.status(200 || 200).json({ success: true, message: 'User Logged In!', token })
 
      } catch (error) {
